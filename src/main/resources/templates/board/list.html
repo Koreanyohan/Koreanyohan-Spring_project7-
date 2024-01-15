@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+	<th:block th:fragment="content">
+
+		<!-- 링크 처리 -->
+		<h1>Board List Page
+		 	<span>
+                <a th:href="@{/board/register}">
+                    <button type="button" class="btn btn-outline-primary">게시물 등록</button>
+                </a>
+            </span>
+		</h1>
+
+		<table class="table table-striped">  <!-- 부트스트랩의 스타일 적용 -->
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">등록일</th>
+				</tr>
+			</thead>
+
+			<!-- 테이블에 타임리프 처리 -->
+			<tbody>
+				<tr th:each="dto : ${list}"> <!-- 게시물 리스트를 하나씩 꺼내서 처리하기 -->
+					<th scope="row">
+						<a th:href="@{/board/read(no = ${dto.no})}">[[${dto.no}]]</a> <!-- 상세화면 링크 처리 -->
+					</th>
+					<td>[[${dto.title}]]</td>
+					<td>[[${dto.writer}]]</td>
+					<td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td> <!-- 날짜는 년/월/일 포맷으로 처리 -->
+				</tr>
+
+			</tbody>
+		</table>
+
+		<script th:inline="javascript">
+			$(document).ready(function(){
+			  // 실행할 기능을 정의
+			  var msg = [[${msg}]]
+			  if(msg != null){
+				  alert(msg + "번 글이 등록되었습니다.");
+			  }
+			});
+		</script>
+
+	</th:block>
+
+</th:block>
