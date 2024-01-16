@@ -27,3 +27,17 @@ public class Board extends BaseEntity { // 등록일, 수정일 필드 상속받
     private String writer; //작성자
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

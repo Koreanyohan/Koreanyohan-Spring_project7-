@@ -25,3 +25,27 @@ abstract class BaseEntity {
     
     // 실행클래스에 @EnableJpaAuditing 이거넣어야됨.!!! 그래야 날짜 입력
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,10 @@
 // 7장 p.16 
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +32,32 @@ public class BoardServiceImpl implements BoardService {
 			
 			return newNo;	 
 
+	}
+
+	@Override
+	public List<BoardDTO> getList() {
+		
+		List<Board> result = repository.findAll(); //repository에서 Board 목록 가져와서 List에 저장
+		
+		List<BoardDTO> list = new ArrayList<>(); // BoardDTO 객체선언
+		
+		list = result.stream() //스트림 생성
+				.map(entity ->entityToDTO(entity)) // 중간연산 entity 다량 생산
+				.collect(Collectors.toList());	// 최종연산 entity들 => dto리스트
+		
+		return list;
 	} 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
