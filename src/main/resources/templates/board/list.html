@@ -41,12 +41,33 @@
 		<td> [[${dto.writer}]]</td>
 		
 		<td> [[ ${ #temporals.format( dto.regDate, 'yyyy/MM/dd') } ]] </td>   
-		<!-- 날짜데이터 특정한 형식으로 표현 (value, pattern) -->				
+		<!-- 날짜데이터 특정한 형식으로 표현. temporals라는 객체 생성&메서드 (value, pattern) -->				
 		
     	</tr>
     </tbody>
+    
 
 </table>
+
+	<!-- ▼ p.36 -->
+	<script th:inline="javascript">
+	
+	$(document).ready(
+			
+		function(){
+		
+			var msg = [[ ${msg} ]]; /* 컨트롤러에서 msg라는 변수 받음 */
+		
+			if(msg !=null){
+			alert (msg + "번 글이 등록되었습니다.")
+			
+			}
+		
+		}
+	
+	);
+	
+	</script>
 
  </th:block> <!-- 6행에서 시작 -->
 

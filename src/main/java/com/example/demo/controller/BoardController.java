@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.BoardDTO;
@@ -45,18 +46,79 @@ public class BoardController {
     // 2-2. 등록처리
     @PostMapping("/register") // 위의 메서드는 void 반환이고 이거는 String 반환이라 "~" 부분 같아도 노상관.
     public String registerPost(BoardDTO dto, RedirectAttributes redictRedirectAttributes) {
-    						      	//  화면에서 전달받은 게시물정보				ㄴ 전달자 객체 (model과 기능은 같다. redirect할때 쓸 뿐). 여기에 우리가 등록창에서 입력한 것이 들어옴.
+    						  	// ㄴ 화면에서 전달받은 게시물정보. 즉, 파라미터	ㄴ 전달자 객체 (model과 기능은 같다. redirect할때 쓸 뿐). 여기에 우리가 등록창에서 입력한 것이 들어옴.
     	// 게시물 등록하고 새로운 게시물 번호 반환
     	int no = service.register(dto);
     	
-    	// 목록화면에 새로운 게시물 번호 전달
-    	redictRedirectAttributes.addFlashAttribute("msg", no);
+    	// 목록(list)화면에 새로운 게시물 번호 전달 (p.36-37 관련. list파일 51행가라)
+    	redictRedirectAttributes.addFlashAttribute("msg", no); // 컨트롤러 -> view . cf)수정에서 post매핑된 메서드는 .addAttribute다!!
 		
     	// 목록화면으로 이동. html경로 아님. url주소를 작성할 것.
-    	return "redirect:/board/list"; // 매핑되어 있는 주소. 따라서 이것은 30행의 클래스 호출
+    	return "redirect:/board/list"; // 매핑(mapping)되어 있는 주소. 따라서 이것은 30행의 클래스 호출
     	
     };
 
     
+    // 3. 상세조회 (p.41)
+    @GetMapping("/read")
+    public void read(@RequestParam(name="no") int no, Model model) { // 게시물번호가 파라미터
+    	BoardDTO dto = service.read(no); 
+    	
+    	model.addAttribute("dto", dto); // 컨트롤러 -> view
+    }
+    
+    
+    // 4. 수정 (p.49)
+    @GetMapping("/modify")
+    public void modify(@RequestParam(name="no") int no, Model model) {
+    	
+    	BoardDTO dto = service.read(no);
+    	
+    	model.addAttribute("dto", dto);
+    	
+    }
+    
+    @PostMapping("/modify") // 위의 메서드는 void 반환이고 이거는 String 반환이라 "~" 부분 같아도 노상관.
+    public String modifyPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
+   						//     ㄴ 파라미터	    ㄴ 전달자 객체 (model과 기능은 같다. redirect할때 쓸 뿐). 여기에 우리가 등록창에서 입력한 것이 들어옴.
+    	// 게시물 수정 메서드
+    	service.modify(dto);
+    	
+    	// 리다이렉트 주소에 파라미터 추가 (?no=1)
+    	redirectAttributes.addAttribute("no", dto.getNo()); // cf)등록에서 post매핑된 메서드는 .addFlashAttribute다!!
+    	
+    	// 상세화면으로 이동
+    	return "redirect:/board/read"; // 매핑(mapping)되어 있는 주소. 따라서 이것은 63행의 클래스 호출
+    	
+    }    
+    
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

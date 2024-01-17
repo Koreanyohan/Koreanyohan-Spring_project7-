@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.dto.BoardDTO;
 import com.example.demo.entity.Board;
-
+//service.~ 메서드들 BoardServiceImpl에 정의된 것들이다
 @SpringBootTest
 public class BoardServiceTest {  // cf) BoardService라고 클래스이름 만들면 ㅈ된다.
 	@Autowired
@@ -38,9 +38,47 @@ public class BoardServiceTest {  // cf) BoardService라고 클래스이름 만�
 		}
 	}
 	
+	@Test
+	void 게시물단건조회() { // 3. 게시물 상세조회 (p.38~)
+		BoardDTO dto = service.read(3);
+				
+			System.out.println(dto);
+		
+	}
 	
+	@Test
+	void 게시물수정() { // 4. 게시물 수정 (p.46~)	
+		BoardDTO dto = service.read(4);
+		
+		dto.setContent("내용이 수정되었습니다~");
+		
+		service.modify(dto);;
+		
+	}	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

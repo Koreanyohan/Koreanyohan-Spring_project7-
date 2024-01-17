@@ -48,5 +48,44 @@ public interface BoardService {
 			
 		}
 	
+	// 3. 게시물 상세조회 (p.38~)
+		BoardDTO read(int no); // 게시물 번호 입력받아서 dto형태로 출력하는 추상메서드
   
+		
+	// 4. 게시물 수정 (p.46~)	
+		void modify(BoardDTO dto); // 수정한 ｄｔｏ 입력받아서 데이터 수정하는 추상메서드
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
