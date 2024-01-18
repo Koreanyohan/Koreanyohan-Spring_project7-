@@ -86,7 +86,21 @@ public class BoardServiceImpl implements BoardService {
 			repository.save(entity);
 		}	
 		
-	} 	
+	}
+	
+	
+	@Override // 5. 게시물 삭제 (p.56~)
+	public int remove(int no) { // 삭제 성공시 1을 리턴받음. 삭제 실패시 0을 리턴받음
+		
+		Optional<Board> result = repository.findById(no);
+		
+		if(result.isPresent()) {
+			repository.deleteById(no);
+			return 1; // 성공
+		
+		} else
+		return 0; // 실패
+	}
 }
 
 

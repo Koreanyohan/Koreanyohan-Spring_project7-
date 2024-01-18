@@ -56,6 +56,13 @@ public class BoardServiceTest {  // cf) BoardService라고 클래스이름 만�
 		
 	}	
 	
+	@Test
+	void 게시물삭제() { // 5. 게시물 삭제 (p.56~)	
+		int result = service.remove(12);
+		
+		System.out.println("결과가 1이면 삭제에 성공한 거고 결과가 0이면 삭제에 실패한거다 : "+result);
+		
+	}	
 }
 
 

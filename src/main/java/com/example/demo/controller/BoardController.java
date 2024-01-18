@@ -64,12 +64,12 @@ public class BoardController {
     public void read(@RequestParam(name="no") int no, Model model) { // 게시물번호가 파라미터
     	BoardDTO dto = service.read(no); 
     	
-    	model.addAttribute("dto", dto); // 컨트롤러 -> view
+    	model.addAttribute("dto", dto); // 컨트롤러 -> view 전달
     }
     
     
     // 4. 수정 (p.49)
-    @GetMapping("/modify")
+    @GetMapping("/modify") // 수정 화면 메서드
     public void modify(@RequestParam(name="no") int no, Model model) {
     	
     	BoardDTO dto = service.read(no);
@@ -78,8 +78,8 @@ public class BoardController {
     	
     }
     
-    @PostMapping("/modify") // 위의 메서드는 void 반환이고 이거는 String 반환이라 "~" 부분 같아도 노상관.
-    public String modifyPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
+    @PostMapping("/modify") // 위의 메서드는 void 반환이고 이거는 String 반환이라 "~" 부분 같아도 노상관. // modify파일 56행~ 부분이다.
+    public String modifyPost(BoardDTO dto, RedirectAttributes redirectAttributes) { // 수정 완료시 이루어지는 메서드다.
    						//     ㄴ 파라미터	    ㄴ 전달자 객체 (model과 기능은 같다. redirect할때 쓸 뿐). 여기에 우리가 등록창에서 입력한 것이 들어옴.
     	// 게시물 수정 메서드
     	service.modify(dto);
@@ -93,6 +93,16 @@ public class BoardController {
     }    
     
     
+    // 5. 삭제 (p.59)
+    @PostMapping("/remove")
+    public String removePost(@RequestParam(name="no") int no) {  // 선생님이 @RequestParam(name="no")붙이라해서 붙이긴했는데 없어도 되네.. list?=no로 표시되서 리다이렉트되는거 아니니 노상관아닌가
+    	
+    	service.remove(no);
+    	
+    	return "redirect:/board/list";
+    	
+    	
+    }    
 }
 
 

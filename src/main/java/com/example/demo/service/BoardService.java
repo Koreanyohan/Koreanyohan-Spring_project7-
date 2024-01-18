@@ -54,6 +54,11 @@ public interface BoardService {
 		
 	// 4. 게시물 수정 (p.46~)	
 		void modify(BoardDTO dto); // 수정한 ｄｔｏ 입력받아서 데이터 수정하는 추상메서드
+		
+		
+	// 5. 게시물 삭제 (p.56~)
+		int remove(int no); // 결과 알려주려고 하다보니 반환타입들어감. 아니면 그냥 void였었음.
+		
 }
 
 
